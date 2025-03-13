@@ -44,15 +44,11 @@ export function AuthProvider({ children }) {
   };
 
 // IF ROLE = ADMIN/TECHNICIAN/USER PUSH THEM TO THEIR CORRESPONDING LANDING PAGE
-  const redirectUser = (role) => {
-    if (role === "admin") {
-      router.push("/admin");
-    } else if (role === "technician") {
-      router.push("/technician");
-    } else {
-      router.push("/customer");
-    }
-  };
+const redirectUser = (role) => {
+  if (role === "admin") return router.push("/admin");
+  if (role === "technician") return router.push("/technician");
+  router.push("/customer");
+};
 
   return (
     <AuthContext.Provider value={{ user, login, logout }}>
