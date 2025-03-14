@@ -4,8 +4,8 @@ import Auth from "./auth/page";
 const page = () => {
   return (
     <div>
-      {/* AKA LOGIN PAGE */}
-      <Auth /> 
+      {/* Auth to Login */}
+      <Auth />
     </div>
   );
 };

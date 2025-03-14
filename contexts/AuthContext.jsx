@@ -8,7 +8,7 @@ const AuthContext = createContext();
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const router = useRouter();
-  const pb = new PocketBase("http://127.0.0.1:8090");
+  const pb = new PocketBase("https://dbdaikin.07130116.xyz");
 
   useEffect(() => {
     const authData = pb.authStore.model;
@@ -16,39 +16,40 @@ export function AuthProvider({ children }) {
   }, []);
 
   const login = async (email, password) => {
-
     try {
-        const authData = await pb.collection("users").authWithPassword(email, password);
-        console.log("Login successful:", authData);
+      const authData = await pb
+        .collection("users")
+        .authWithPassword(email, password);
+      console.log("Login successful:", authData);
 
-        setUser(authData.record);
-        redirectUser(authData.record.role);
-        return authData.record;
+      setUser(authData.record);
+      redirectUser(authData.record.role);
+      return authData.record;
     } catch (error) {
-        if (error.status === 400) {
-            // Handle invalid credentials without logging an error in the console
-            alert("Invalid email or password! Please try again.");
-        } else {
-            // Log unexpected errors for debugging
-            console.error("Login failed:", error);
-            alert("An unexpected error occurred. Please try again later.");
-        }
+      if (error.status === 400) {
+        // Handle invalid credentials without logging an error in the console
+        alert("Invalid email or password! Please try again.");
+      } else {
+        // Log unexpected errors for debugging
+        console.error("Login failed:", error);
+        alert("An unexpected error occurred. Please try again later.");
+      }
     }
-};
+  };
 
-// IF USER LOGS OUT = SENT TO /AUTH (AKA LOGIN PAGE)
+  // IF USER LOGS OUT = SENT TO /AUTH (AKA LOGIN PAGE)
   const logout = () => {
     pb.authStore.clear();
     setUser(null);
     router.push("/auth");
   };
 
-// IF ROLE = ADMIN/TECHNICIAN/USER PUSH THEM TO THEIR CORRESPONDING LANDING PAGE
-const redirectUser = (role) => {
-  if (role === "admin") return router.push("/admin");
-  if (role === "technician") return router.push("/technician");
-  router.push("/customer");
-};
+  // IF ROLE = ADMIN/TECHNICIAN/USER PUSH THEM TO THEIR CORRESPONDING LANDING PAGE
+  const redirectUser = (role) => {
+    if (role === "admin") return router.push("/admin");
+    if (role === "technician") return router.push("/technician");
+    router.push("/customer");
+  };
 
   return (
     <AuthContext.Provider value={{ user, login, logout }}>

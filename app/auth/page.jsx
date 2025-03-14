@@ -11,61 +11,55 @@ const Page = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    
     try {
-        const user = await login(email, password);
-        
-        if (user) {
-            if (user.role === "admin") {
-                router.push("/admin");
-            } else if (user.role === "technician") {
-                router.push("/technician");
-            } else {
-                router.push("/customer");
-            }
-        }
+      const user = await login(email, password);
+      if (!user) return;
     } catch (error) {
-        console.error("Login failed:", error);
-        
-        if (error.status === 400) {
-            alert("Invalid email or password!");
-        }
+      console.error("Login failed:", error);
+      if (error.status === 400) {
+        alert("Invalid email or password!");
+      }
     }
-};
-
+  };
 
   return (
-    // MAIN DIV
-    <main className="h-screen w-full bg-white flex justify-center items-center">
-      {/* LOGIN CARD */}
-      <section className="w-[20%] h-[40%] bg-[#F8F8FF] shadow-lg flex flex-col items-center justify-center p-6 rounded-lg">
-        {/* LOGIN HEADER */}
-        <h1 className="text-2xl font-semibold text-black mb-6">LOGIN</h1>
-        {/* EMAIL INPUT FIELD */}
+    <main
+      className="h-screen w-full flex justify-center items-center"
+      style={{
+        backgroundImage: "url('/images/bg-filter.png')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      {/* Login Card */}
+      <section className="w-96 h-fit bg-[#F8F8FF] shadow-lg flex flex-col items-center justify-center p-6 rounded-lg gap-5">
+        {/* Header */}
+        <h1 className="text-2xl font-semibold text-black mb-6">Please Login</h1>
+        {/* Email Input */}
         <input
           type="email"
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
-          className="h-12 w-[80%] px-4 mb-4 text-black rounded-lg bg-white shadow-md placeholder:text-black"
+          className="h-fit px-4 py-2 w-full text-black rounded-lg bg-white shadow-md placeholder:text-gray-800"
         />
-        {/* PASSWORD INPUT FIELD */}
+        {/* Password Input */}
         <input
           type="password"
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
-          className="h-12 w-[80%] px-4 rounded-lg bg-white shadow-md placeholder:text-black text-black"
+          className="h-fit w-full px-4 py-2 rounded-lg bg-white shadow-md placeholder:text-gray-800 text-black"
         />
-        {/* SUBMIT BUTTON */}
+        {/* Submit Button */}
         <button
           type="submit"
           onClick={handleLogin}
-          className="w-[40%] h-[10%] bg-blue-400 m-auto rounded-[200px] text-[#F8F8FF] cursor-pointer shadow-lg"
+          className="w-full h-fit px-4 py-2 bg-blue-400 m-auto rounded-lg text-[#F8F8FF] cursor-pointer shadow-lg"
         >
-          SUBMIT
+          Login
         </button>
       </section>
     </main>
