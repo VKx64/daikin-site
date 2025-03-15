@@ -1,0 +1,45 @@
+name: Feature Request
+description: Guided request for features
+labels: ["enhancement"]
+body:
+  # Markdown element for the form title and description
+  - type: markdown
+    attributes:
+      value: |
+        ## Feature Request
+        Please fill out the form to submit a feature request. Your feedback is valuable and will help improve our platform.
+
+  # Dropdown element for selecting the user type
+  - type: dropdown
+    id: user_type
+    attributes:
+      label: Which user is this feature for?
+      description: Select the user role for whom the feature is intended.
+      options:
+        - Customer
+        - Admin
+        - Technician
+      default: 0
+    validations:
+      required: true
+
+  # Input element for describing the feature
+  - type: input
+    id: feature_description
+    attributes:
+      label: What is the feature?
+      description: Provide a clear and detailed description of the feature you'd like to see.
+      placeholder: "Example: A new dashboard for admins to manage users"
+    validations:
+      required: true
+
+  # Date picker element for selecting the preferred completion date
+  - type: input
+    id: preferred_completion
+    attributes:
+      label: When is the preferred completion date?
+      description: Select the desired date for when you would like this feature to be completed.
+      placeholder: "YYYY-MM-DD"
+      value: "2025-03-15"  # Pre-filled with today's date or you can leave it empty
+    validations:
+      required: true
