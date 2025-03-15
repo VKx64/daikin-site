@@ -1,13 +1,14 @@
 name: ⭐ Feature Request
 description: Guided request for features
 labels: ["enhancement"]
+projects: ["VKx64/6"]
 body:
   # Markdown element for the form title and description
   - type: markdown
     attributes:
       value: |
         ## Feature Request
-        Please fill out the form to submit a feature request. Your feedback is valuable and will help improve our platform.
+        Please fill out the form to submit a feature request.
 
   # Dropdown element for selecting the user type
   - type: dropdown
