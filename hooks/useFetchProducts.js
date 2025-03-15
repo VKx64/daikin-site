@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import PocketBase from "pocketbase";
 
-const pb = new PocketBase("https://dbdaikin.07130116.xyz");
+const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
 
 // Custom hook to fetch products
 const useFetchProducts = () => {

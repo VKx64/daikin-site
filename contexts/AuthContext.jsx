@@ -8,7 +8,7 @@ const AuthContext = createContext();
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const router = useRouter();
-  const pb = new PocketBase("https://dbdaikin.07130116.xyz");
+  const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
 
   useEffect(() => {
     const authData = pb.authStore.model;
